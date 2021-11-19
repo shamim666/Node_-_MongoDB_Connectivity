@@ -55,6 +55,8 @@ async function run() {
         await client.connect();
         const database = client.db("foodMaster");
         const users = database.collection("users");
+
+        console.log('connection established to DB')
         // create a document or js object to insert
         const user = {
             name: "reza",
@@ -62,6 +64,7 @@ async function run() {
             phone: '01278884623'
         }
         const result = await users.insertOne(user);
+
         console.log(`A document was inserted with the _id: ${result.insertedId}`);
     } 
     
@@ -71,10 +74,17 @@ async function run() {
 }
 run().catch(console.dir);
 
+// to check the node server is ok 
+// if you write in address bar of a browser below link and found  the send result
+// http://localhost:7000
 
 app.get('/', (req, res) => {
     res.send('this is CRUD server')
 })
+
+// to check the node server is ok
+// if you type below command in cmd of that project and get result of console.log
+// (nodemon index.js) or (npm run start-dev)
 
 app.listen(port, () => {
     console.log('listening to port', port)
